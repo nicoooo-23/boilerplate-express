@@ -28,6 +28,37 @@ args = "PORT=5000 npm start"
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[[workflows.workflow]]
+name = "Restart"
+mode = "sequential"
+author = 61427459
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "kill 1"
+
+[[workflows.workflow]]
+name = "Re-install dependencies"
+mode = "sequential"
+author = 61427459
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf node_modules"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install"
+
+[[workflows.workflow]]
+name = "Audit Fix"
+mode = "sequential"
+author = 61427459
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm audit fix"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
