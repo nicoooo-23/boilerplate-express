@@ -12,6 +12,18 @@ app.use(function (req, res, next) {
   next();
 });
 
+// Challenge 8
+app.get(
+  "/now",
+  (req, res, next) => {
+    req.time = new Date().toString();
+    next();
+  },
+  (req, res) => {
+    res.json({ time: req.time });
+  },
+);
+
 // Challenge 4
 app.use("/public", express.static(__dirname + "/public"));
 
@@ -29,20 +41,8 @@ app.get("/json", function (req, res) {
         message: "HELLO JSON",
       })
     : res.json({
-        message: "Hello JSON", // Challenge 5
+        message: "Hello json", // Challenge 5
       });
-});
-
-// Challenge 8
-const middleware = (req, res, next) => {
-  req.time = new Date().toString();
-  next();
-};
-
-app.get("/now", middleware, (req, res) => {
-  res.send({
-    time: req.time,
-  });
 });
 
 // Challenge 9
